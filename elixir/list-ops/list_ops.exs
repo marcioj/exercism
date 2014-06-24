@@ -82,12 +82,14 @@ defmodule ListOps do
 
   @spec concat([[any]]) :: [any]
   def concat(ll) do
-    reverse(do_concat(ll, []))
+    reverse(do_concat_first_depth(ll, []))
   end
 
-  defp do_concat([head|tail], acc) when is_list(head) do
-    do_concat(tail, do_concat(head, acc))
+  defp do_concat_first_depth([head|tail], acc) when is_list(head) do
+    do_concat_first_depth(tail, do_concat(head, acc))
   end
+
+  defp do_concat_first_depth([], acc), do: acc
 
   defp do_concat([head|tail], acc) do
     do_concat(tail, [head|acc])

@@ -118,4 +118,9 @@ defmodule ListOpsTest do
     assert L.concat(Enum.map(0..9, &Enum.to_list((&1*100_000+1)..((&1+1)*100_000)))) ==
       Enum.to_list(1..1_000_000)
   end
+
+  test "keeps lists nested more than two times" do
+    input=[[1, [2], 3], [4], [5, 6]]
+    assert L.concat(input) == Enum.concat(input)
+  end
 end
