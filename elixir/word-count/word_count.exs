@@ -9,7 +9,7 @@ defmodule Words do
   """
   @spec count(String.t) :: HashDict.t
   def count(sentence) do
-    words = sentence |> downcase |> split(~r/[^\w-]/u, trim: true) |> flat_map(&(split(&1, "_")))
+    words = sentence |> downcase |> split_words
     do_count(words, HashDict.new)
   end
 
@@ -18,8 +18,9 @@ defmodule Words do
     do_count(words, hash)
   end
 
-  defp do_count([], hash) do
-    hash
-  end
+  defp do_count([], hash), do: hash
 
+  defp split_words(text) do
+    text |> split(~r/[^\w-]/u, trim: true) |> flat_map(&(split(&1, "_")))
+  end
 end
