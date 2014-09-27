@@ -29,15 +29,11 @@ defmodule ListOps do
   defp do_reverve([], acc), do: acc
 
   @spec map(list, (any -> any)) :: list
-  def map(l, f) do
-    reverse(do_map(l, [], f))
+  def map([head|tail], f) do
+    [f.(head) | map(tail, f)]
   end
 
-  defp do_map([head|tail], acc, f) do
-    do_map(tail, [f.(head) | acc], f)
-  end
-
-  defp do_map([], acc, _), do: acc
+  def map([], _), do: []
 
   @spec filter(list, (any -> as_boolean(term))) :: list
   def filter(l, f) do
