@@ -17,15 +17,13 @@ defmodule ListOps do
   def count(list, count \\ 0)
 
   @spec reverse(list) :: list
-  def reverse(l) do
-    do_reverve(l, [])
+  def reverse(list, acc \\ [])
+
+  def reverse([head|tail], acc) do
+    reverse(tail, [head | acc])
   end
 
-  defp do_reverve([head|tail], acc) do
-    do_reverve(tail, [head | acc])
-  end
-
-  defp do_reverve([], acc), do: acc
+  def reverse([], acc), do: acc
 
   @spec map(list, (any -> any)) :: list
   def map([head|tail], f) do
