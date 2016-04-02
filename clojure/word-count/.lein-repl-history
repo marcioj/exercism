@@ -1,0 +1,3 @@
+(doc str)
+(doc-find "compose")
+(find-doc "compose")
